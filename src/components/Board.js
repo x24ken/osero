@@ -1,17 +1,23 @@
-import Masu from "./Cell";
+import Cell from "./Cell";
+import { usePossibleCells } from "../context/PossibleCellsContext";
 
-const Board = ({ othello, onClick }) => {
+const Board = () => {
+  const possibleCells = usePossibleCells();
+  const possibleClickCells = possibleCells.map((_) => {
+    return _[0];
+  });
+  // console.log(possibleCells);
   const renderSquare = (yIndex, xIndex) => {
-    return (
-      <Masu
-        value={othello[yIndex][xIndex]}
-        onClick={() => onClick(yIndex, xIndex)}
-      />
+    const isClickArray = possibleClickCells.filter(
+      (possibleCell) => possibleCell[0] === yIndex && possibleCell[1] === xIndex
     );
+    const isClick = isClickArray.length === 1;
+
+    return <Cell cell={[yIndex, xIndex]} isClick={isClick} />;
   };
 
   return (
-    <>
+    <div className="game-board">
       <div>
         <div className="board-row">
           {renderSquare(0, 0)}
@@ -94,7 +100,7 @@ const Board = ({ othello, onClick }) => {
           {renderSquare(7, 7)}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

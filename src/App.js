@@ -1,10 +1,10 @@
 import "./App.css";
-import Othello from "./components/Othello";
+import ProviderCover from "./components/ProviderCover";
 
 function App() {
   return (
     <div className="App">
-      <Othello />
+      <ProviderCover />
     </div>
   );
 }
