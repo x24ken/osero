@@ -1,16 +1,22 @@
 import { useEffect } from "react";
+import styled from "styled-components";
 import { useOthello } from "../context/OthelloContext";
-import { useDispatchPossibleCells } from "../context/PossibleCellsContext";
-import { useTurn } from "../context/TurnContext";
 import { checkPossibleReturnOthelloArray } from "../helpers/OthelloHelper";
-
+import { usePossibleCellsDispatch } from "../context/PossibleCellsContext";
 import Board from "./Board";
-import Info from "./Info";
+import { useTurn } from "../context/TurnContext";
+const StyledBoard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+`;
 
 const Othello = () => {
   const othello = useOthello();
-  const possibleCellsdispatch = useDispatchPossibleCells();
   const turn = useTurn();
+
+  const possibleCellsDispatch = usePossibleCellsDispatch();
 
   // PossibleCellsの配列を更新する（赤いところ)
   useEffect(() => {
@@ -18,15 +24,14 @@ const Othello = () => {
       othello,
       turn === "black"
     );
-    possibleCellsdispatch({ type: "possibleCells/update", newPossibleCells });
+    possibleCellsDispatch({ type: "possibleCells/update", newPossibleCells });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [othello]);
 
   return (
-    <div className="game">
+    <StyledBoard>
       <Board />
-      <Info />
-    </div>
+    </StyledBoard>
   );
 };
 

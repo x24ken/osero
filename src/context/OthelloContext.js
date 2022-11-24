@@ -13,7 +13,17 @@ const initialOthello = [
   [null, null, null, null, null, null, null, null],
 ];
 
-const othelloReducer = (othello, { type, cell }) => {
+const othelloReducer = (othello, { type, cell = "" }) => {
+  const initialOthello = [
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, "black", "white", null, null, null],
+    [null, null, null, "white", "black", null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+  ];
   const [yIndex, xIndex] = cell;
   switch (type) {
     case "othello/update/black":
@@ -22,6 +32,9 @@ const othelloReducer = (othello, { type, cell }) => {
     case "othello/update/white":
       console.log("othello/update/white");
       return [...othello, (othello[yIndex][xIndex] = "white")];
+    case "othello/reset":
+      console.log("othello/reset");
+      return initialOthello;
     default:
       throw Error("そんなアクションはありません。");
   }

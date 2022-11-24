@@ -21,13 +21,19 @@ const initalPossibleCells = [
 ];
 
 const PossibleCellsContext = createContext();
-const DispatchPossibleCellsContext = createContext();
+const PossibleCellsDispatchContext = createContext();
 
-const PossibleCellsReducer = (possibleCells, { type, newPossibleCells }) => {
+const PossibleCellsReducer = (
+  possibleCells,
+  { type, newPossibleCells = "" }
+) => {
   switch (type) {
     case "possibleCells/update":
       console.log("possibleCells/update");
       return newPossibleCells;
+    case "possibleCells/reset":
+      console.log("possibleCells/reset");
+      return initalPossibleCells;
     // eslint-disable-next-line no-fallthrough
     default:
       throw Error("possibleCellsのところでエラーがでました");
@@ -42,14 +48,14 @@ const PossibleCellsProvider = ({ children }) => {
 
   return (
     <PossibleCellsContext.Provider value={state}>
-      <DispatchPossibleCellsContext.Provider value={dispatch}>
+      <PossibleCellsDispatchContext.Provider value={dispatch}>
         {children}
-      </DispatchPossibleCellsContext.Provider>
+      </PossibleCellsDispatchContext.Provider>
     </PossibleCellsContext.Provider>
   );
 };
 
 const usePossibleCells = () => useContext(PossibleCellsContext);
-const useDispatchPossibleCells = () => useContext(DispatchPossibleCellsContext);
+const usePossibleCellsDispatch = () => useContext(PossibleCellsDispatchContext);
 
-export { PossibleCellsProvider, usePossibleCells, useDispatchPossibleCells };
+export { PossibleCellsProvider, usePossibleCells, usePossibleCellsDispatch };

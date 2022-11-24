@@ -1,17 +1,17 @@
+import { GameProvider } from "../context/GameContext";
 import { OthelloProvider } from "../context/OthelloContext";
 import { PossibleCellsProvider } from "../context/PossibleCellsContext";
 import { TurnProvider } from "../context/TurnContext";
-import Game from "./Game";
 
-const ProviderCover = () => {
+const ProviderCover = ({ children }) => {
   return (
-    <PossibleCellsProvider>
-      <TurnProvider>
-        <OthelloProvider>
-          <Game />
-        </OthelloProvider>
-      </TurnProvider>
-    </PossibleCellsProvider>
+    <GameProvider>
+      <PossibleCellsProvider>
+        <TurnProvider>
+          <OthelloProvider>{children}</OthelloProvider>
+        </TurnProvider>
+      </PossibleCellsProvider>
+    </GameProvider>
   );
 };
 

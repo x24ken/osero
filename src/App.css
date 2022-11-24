@@ -1,28 +1,6 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
-  margin: 20px;
-}
-
-ol,
-ul {
-  padding-left: 30px;
-}
-
-.board-row:after {
-  clear: both;
-  content: "";
-  display: table;
-}
-
-.status {
-  margin-bottom: 10px;
-}
-
-.game {
-  display: flex;
-  flex-direction: row;
-}
-
-.game-info {
-  margin-left: 20px;
+  background: linear-gradient(180deg, #f9f8fa 0%, rgba(94, 52, 102, 0.65) 100%);
+  min-height: 100vh;
+  border: #f9f8fa;
 }
