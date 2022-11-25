@@ -48,14 +48,6 @@ const Game = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [turn, game]);
 
-  useEffect(() => {
-    if (possibleCells.length === 0) {
-      console.log("パス");
-      setTurn((prev) => (prev === "black" ? "white" : "black"));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [possibleCells]);
-
   return (
     <>
       <Othello />
