@@ -5,7 +5,6 @@ import { usePossibleCells } from "../context/PossibleCellsContext";
 import { useSetTurn, useTurn } from "../context/TurnContext";
 import { checkPossibleReturnOthelloArray } from "../helpers/OthelloHelper";
 import Othello from "./Othello";
-import PassButton from "./PassButton";
 
 // 1000ms待つ処理
 const wait = () => {
@@ -33,6 +32,7 @@ const Game = () => {
       );
       const maxIndex = newPossibleCells.length - 1;
       if (maxIndex === -1) {
+        setTurn((prev) => (prev === "black" ? "white" : "black"));
         return;
       }
       const randomIndex = Math.floor(Math.random() * maxIndex);

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useOthello } from "../context/OthelloContext";
-import { useGame } from "../context/GameContext";
 import styled from "styled-components";
 import { useTurn } from "../context/TurnContext";
 
