@@ -28,7 +28,6 @@ const Game = () => {
         othello,
         turn === "black"
       );
-      console.log(newPossibleCells.length);
       const maxIndex = newPossibleCells.length - 1;
       const randomIndex = Math.floor(Math.random() * maxIndex);
       newPossibleCells[randomIndex].map((cell) =>
