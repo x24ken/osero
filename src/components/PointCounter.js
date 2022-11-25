@@ -39,11 +39,11 @@ const PointCounter = () => {
 
   return (
     <StyledPointCounter turn={turn}>
-      <span className={`${turn === "black" && game.user ? "red" : ""}`}>
+      <span className={`${turn === "black" && game.process ? "red" : ""}`}>
         black
       </span>
       :{blackCount} vs{" "}
-      <span className={`${turn === "white" && game.user ? "red" : ""}`}>
+      <span className={`${turn === "white" && game.process ? "red" : ""}`}>
         white
       </span>
       : {whiteCount}

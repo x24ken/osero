@@ -21,7 +21,7 @@ const StyledStartButton = styled.button`
   font-size: 36px;
   color: #ffffff;
 
-  cursor: ${(props) => (props.game.user ? "not-allowed" : "pointer")};
+  cursor: ${(props) => (props.game.process ? "not-allowed" : "pointer")};
 `;
 
 const Start = () => {
@@ -29,7 +29,7 @@ const Start = () => {
   const game = useGame();
 
   const clickHandler = () => {
-    if (game.user) {
+    if (game.process) {
       return;
     }
     const random = Math.floor(Math.random() * 2);
@@ -44,7 +44,7 @@ const Start = () => {
 
   return (
     <StyledStartButton onClick={clickHandler} game={game}>{`${
-      game.user ? "CPUと対戦中" : "CPU戦スタート"
+      game.process ? "CPUと対戦中" : "CPU戦スタート"
     }`}</StyledStartButton>
   );
 };
