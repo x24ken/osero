@@ -28,7 +28,6 @@ const counter = (othello, color) => {
 const PointCounter = () => {
   const othello = useOthello();
   const turn = useTurn();
-  const game = useGame();
   const [blackCount, setBlackCount] = useState(2);
   const [whiteCount, setWhiteCount] = useState(2);
 
@@ -39,14 +38,10 @@ const PointCounter = () => {
 
   return (
     <StyledPointCounter turn={turn}>
-      <span className={`${turn === "black" && game.process ? "red" : ""}`}>
-        black
-      </span>
-      :{blackCount} vs{" "}
-      <span className={`${turn === "white" && game.process ? "red" : ""}`}>
-        white
-      </span>
-      : {whiteCount}
+      <span className={`${turn === "black" ? "red" : ""}`}>black</span>:
+      {blackCount} vs{" "}
+      <span className={`${turn === "white" ? "red" : ""}`}>white</span>:{" "}
+      {whiteCount}
     </StyledPointCounter>
   );
 };

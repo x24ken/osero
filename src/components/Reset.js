@@ -3,7 +3,7 @@ import { useSetTurn } from "../context/TurnContext";
 import { useGameDispatch } from "../context/GameContext";
 import styled from "styled-components";
 
-const StyledResetButton = styled.div`
+const StyledResetButton = styled.button`
   /* オートレイアウト */
   display: flex;
   flex-direction: row;

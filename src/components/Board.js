@@ -10,6 +10,7 @@ const StyledBoardRow = styled.div`
 
 const Board = () => {
   const possibleCells = usePossibleCells();
+
   // クリックできるものを配列として取り出す
   const possibleClickCells = possibleCells.map((_) => {
     return _[0];

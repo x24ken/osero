@@ -4,6 +4,7 @@ import Reset from "./Reset";
 
 import styled from "styled-components";
 import Info from "./Info";
+import PassButton from "./PassButton";
 
 const StyledMain = styled.main`
   display: flex;
@@ -15,13 +16,23 @@ const StyledMain = styled.main`
   position: relative;
 `;
 
+const StyledMenu = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 100px;
+`;
+
 const Main = () => {
   return (
     <StyledMain>
       <Info />
       <Game />
       <Start />
-      <Reset />
+      <StyledMenu>
+        <Reset />
+        <PassButton />
+      </StyledMenu>
     </StyledMain>
   );
 };

@@ -1,3 +1,6 @@
-1, resetボタンの実装 //難しい　飛ばし
-2, styledcompornentの実装
-3, 対戦相手がある
+1, PASSがうまくいっていない
+2, 終了判定のstateがいる？
+
+gameのところに、
+game.user === tarn のときの判定と
+game.cpu 　=== tarnのときの判定を決める
