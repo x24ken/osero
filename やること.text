@@ -1,6 +1,4 @@
-1, PASSがうまくいっていない
-2, 終了判定のstateがいる？
 
-gameのところに、
-game.user === tarn のときの判定と
-game.cpu 　=== tarnのときの判定を決める
+やっぱりゲーム終了判定を行うためには、
+黒のpossibleCellsの配列と
+白のpossibleCellsの配列のContext作らないとだめかもしれない

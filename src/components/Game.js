@@ -19,9 +19,9 @@ const Game = () => {
   const turn = useTurn();
   const setTurn = useSetTurn();
   const othelloDispatch = useOthelloDispatch();
+  const possibleCells = usePossibleCells();
   const othello = useOthello();
   const game = useGame();
-  const possibleCells = usePossibleCells();
 
   const computerClick = async () => {
     if (turn === game.cpu) {
@@ -47,6 +47,14 @@ const Game = () => {
     computerClick();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [turn, game]);
+
+  useEffect(() => {
+    if (turn === game.cpu) {
+      if (possibleCells === 0) {
+        console.log("%cお前の勝ち", "font-size: 24px");
+      }
+    }
+  });
 
   return (
     <>
