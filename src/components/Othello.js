@@ -1,10 +1,13 @@
 import { useEffect } from "react";
 import styled from "styled-components";
-import { useOthello } from "../context/OthelloContext";
 import { checkPossibleReturnOthelloArray } from "../helpers/OthelloHelper";
 import { usePossibleCellsDispatch } from "../context/PossibleCellsContext";
 import Board from "./Board";
 import { useTurn } from "../context/TurnContext";
+import { useSelector } from "react-redux";
+import Reset from "./Reset";
+import { useGame } from "../context/GameContext";
+
 const StyledBoard = styled.div`
   display: flex;
   flex-direction: column;
@@ -13,8 +16,9 @@ const StyledBoard = styled.div`
 `;
 
 const Othello = () => {
-  const othello = useOthello();
+  const othello = useSelector((state) => state.othello);
   const turn = useTurn();
+  const game = useGame();
 
   const possibleCellsDispatch = usePossibleCellsDispatch();
 
@@ -25,8 +29,7 @@ const Othello = () => {
       turn === "black"
     );
     possibleCellsDispatch({ type: "possibleCells/update", newPossibleCells });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [othello]);
+  }, [othello, game, turn, possibleCellsDispatch]);
 
   return (
     <StyledBoard>
