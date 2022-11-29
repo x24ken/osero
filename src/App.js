@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import ProviderCover from "./components/ProviderCover";
 import styled from "styled-components";
+import { Provider } from "react-redux";
+import store from "./store";
 
 const StyledApp = styled.div`
   display: flex;
@@ -16,11 +18,13 @@ function App() {
   return (
     <div className="App">
       <StyledApp>
-        <ProviderCover>
-          <Header />
-          <Main />
-          <Footer />
-        </ProviderCover>
+        <Provider store={store}>
+          <ProviderCover>
+            <Header />
+            <Main />
+            <Footer />
+          </ProviderCover>
+        </Provider>
       </StyledApp>
     </div>
   );

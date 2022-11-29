@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useOthello } from "../context/OthelloContext";
 import styled from "styled-components";
 import { useTurn } from "../context/TurnContext";
+import { useSelector } from "react-redux";
 
 const StyledPointCounter = styled.div`
   font-size: 24px;
@@ -25,7 +25,8 @@ const counter = (othello, color) => {
 };
 
 const PointCounter = () => {
-  const othello = useOthello();
+  const othello = useSelector((state) => state.othello);
+
   const turn = useTurn();
   const [blackCount, setBlackCount] = useState(2);
   const [whiteCount, setWhiteCount] = useState(2);

@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import othelloReducer from "./modules/othello";
+import othelloReducer from "./modules/othelloReducer";
 
 export default configureStore({
   reducer: {
-    othelloReducer,
+    othello: othelloReducer,
   },
 });

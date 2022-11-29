@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useGame } from "../context/GameContext";
-import { useOthello, useOthelloDispatch } from "../context/OthelloContext";
+import { useSelector, useDispatch } from "react-redux";
 import { usePossibleCells } from "../context/PossibleCellsContext";
 import { useSetTurn, useTurn } from "../context/TurnContext";
 import { checkPossibleReturnOthelloArray } from "../helpers/OthelloHelper";
 import Othello from "./Othello";
+import { othelloReset } from "../store/modules/othelloReducer";
 
 // 1000ms待つ処理
 const wait = () => {
@@ -18,10 +19,10 @@ const wait = () => {
 const Game = () => {
   const turn = useTurn();
   const setTurn = useSetTurn();
-  const othelloDispatch = useOthelloDispatch();
   const possibleCells = usePossibleCells();
-  const othello = useOthello();
   const game = useGame();
+  const othello = useSelector((state) => state.othello);
+  const othelloDispatch = useDispatch();
 
   const computerClick = async () => {
     if (turn === game.cpu) {

@@ -1,8 +1,10 @@
-import { useOthello, useOthelloDispatch } from "../context/OthelloContext";
 import { usePossibleCells } from "../context/PossibleCellsContext";
 import { useSetTurn, useTurn } from "../context/TurnContext";
 import styled from "styled-components";
 import { useGame } from "../context/GameContext";
+import { useDispatch, useSelector } from "react-redux";
+import { changeBlack, changeWhite } from "../store/modules/othelloReducer";
+import { useEffect } from "react";
 
 const StyledCellCover = styled.div`
   /* オートレイアウト */
@@ -53,8 +55,8 @@ const StyledCell = styled.div`
 `;
 
 const Cell = ({ cell, isClick }) => {
-  const othello = useOthello();
-  const othelloDispatch = useOthelloDispatch();
+  const othello = useSelector((state) => state.othello);
+  const othelloDispatch = useDispatch();
   const turn = useTurn();
   const setTurn = useSetTurn();
   const [yIndex, xIndex] = cell;
@@ -67,10 +69,12 @@ const Cell = ({ cell, isClick }) => {
       return;
     }
     if (game.cpu === turn) {
-      console.log("クリックできない");
+      console.log("相手のターンなのでクリックできない");
       return;
     }
     // Javascriptの配列の比較がすごく難しい；；
+    // [[3, 3], [4, 4]], [[2, 2], [2, 3]]の中から[2, 2]が最初に来ている配列を探してる
+    // ここ上からindexを渡してあげればもっとシンプルにできるんじゃないの？
     let clickIndex;
     for (const [index, array] of possibleCells.entries()) {
       if (array[0].toString() === cell.toString()) {
@@ -80,16 +84,12 @@ const Cell = ({ cell, isClick }) => {
     // ひっくり返す配列がこれ↓
     const cells = possibleCells[clickIndex];
     if (turn === "black") {
-      cells.map((cell) =>
-        othelloDispatch({ type: "othello/update/black", cell })
-      );
+      cells.map((cell) => othelloDispatch(changeBlack(cell)));
       setTurn("white");
     }
 
     if (turn === "white") {
-      cells.map((cell) =>
-        othelloDispatch({ type: "othello/update/white", cell })
-      );
+      cells.map((cell) => othelloDispatch(changeWhite(cell)));
       setTurn("black");
     }
   };

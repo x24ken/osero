@@ -1,6 +1,7 @@
 import Cell from "./Cell";
 import { usePossibleCells } from "../context/PossibleCellsContext";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 const StyledBoardRow = styled.div`
   display: flex;
