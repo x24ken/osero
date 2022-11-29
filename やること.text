@@ -1,4 +1,5 @@
+相手の番のときにクリックできてしまう問題
 
-やっぱりゲーム終了判定を行うためには、
-黒のpossibleCellsの配列と
-白のpossibleCellsの配列のContext作らないとだめかもしれない
+changeCell(cell, color))という関数に直す
+
+
