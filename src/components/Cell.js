@@ -71,7 +71,7 @@ const Cell = ({ cell, isClick }) => {
     // ひっくり返す配列がこれ↓
     const cells = possibleCells[clickIndex];
     if (turnColor === "black") {
-      cells.forEach((cell) =>
+      cells?.forEach((cell) =>
         dispatch(
           changeCell({
             cell,
@@ -83,7 +83,7 @@ const Cell = ({ cell, isClick }) => {
     }
 
     if (turnColor === "white") {
-      cells.forEach((cell) =>
+      cells?.forEach((cell) =>
         dispatch(
           changeCell({
             cell,

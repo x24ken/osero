@@ -1,23 +1,13 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Othello from "./Othello";
 import { changeCell, updatePossibleCells } from "../store/modules/othello";
 import { setTurnColor } from "../store/modules/color";
+import Othello from "./Othello";
 import store from "../store";
-
-// 1000ms待つ処理
-const wait = () => {
-  return new Promise((resolve) => {
-    setTimeout(function () {
-      resolve();
-    }, 1000);
-  });
-};
 
 const Game = () => {
   const { turnColor, cpuColor } = useSelector((state) => state.color);
   const dispatch = useDispatch();
-  console.log(store.getState());
 
   const computerClick = async () => {
     if (turnColor === cpuColor) {
@@ -35,12 +25,10 @@ const Game = () => {
         turnColor === "black" && dispatch(setTurnColor("white"));
         turnColor === "white" && dispatch(setTurnColor("black"));
       }
-
       const randomIndex = Math.floor(Math.random() * maxIndex);
       const cells = newPossibleCells[randomIndex];
-
       if (turnColor === "black") {
-        cells.forEach((cell) =>
+        cells?.forEach((cell) =>
           dispatch(
             changeCell({
               cell,
@@ -52,7 +40,7 @@ const Game = () => {
       }
 
       if (turnColor === "white") {
-        cells.forEach((cell) =>
+        cells?.forEach((cell) =>
           dispatch(
             changeCell({
               cell,
@@ -78,3 +66,12 @@ const Game = () => {
 };
 
 export default Game;
+
+// 1000ms待つ処理
+const wait = () => {
+  return new Promise((resolve) => {
+    setTimeout(function () {
+      resolve();
+    }, 1000);
+  });
+};
