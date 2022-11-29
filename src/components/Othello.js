@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { checkPossibleReturnOthelloArray } from "../helpers/OthelloHelper";
-import { possibleCellsUpdate } from "../store/modules/possibleCells";
 import Board from "./Board";
 import styled from "styled-components";
+import { updatePossibleCells } from "../store/modules/othello";
 
 const StyledBoard = styled.div`
   display: flex;
@@ -19,12 +18,12 @@ const Othello = () => {
 
   // PossibleCellsの配列を更新する（赤いところ)
   useEffect(() => {
-    const newPossibleCells = checkPossibleReturnOthelloArray(
-      board,
-      turnColor === "black"
+    dispatch(
+      updatePossibleCells({
+        color: turnColor,
+      })
     );
-    dispatch(possibleCellsUpdate(newPossibleCells));
-  }, [board, turnColor, dispatch]);
+  }, [board, dispatch, turnColor]);
 
   return (
     <StyledBoard>

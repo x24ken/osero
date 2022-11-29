@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { checkPossibleReturnOthelloArray } from "../../helpers/OthelloHelper";
 
 const initialState = {
   board: [
@@ -11,8 +12,7 @@ const initialState = {
     [null, null, null, null, null, null, null, null],
     [null, null, null, null, null, null, null, null],
   ],
-  possibleBlack: [], //blackのターンになるたびにuseEffectでsetしていけばいいのでは？
-  possibleWhite: [],
+  possibleCells: [], //blackのターンになるたびにuseEffectでsetしていけばいいのでは？
 };
 
 // payloadに流れてくるのはマス目の値の配列
@@ -21,28 +21,24 @@ const othello = createSlice({
   name: "othello",
   initialState,
   reducers: {
-    changeBlack(state, { type, payload }) {
-      console.log(type, payload);
-      state.board = [
-        ...state.board,
-        (state.board[payload[0]][payload[1]] = "black"),
-      ];
+    changeCell(state, { type, payload }) {
+      const { cell, color } = payload;
+      console.log(cell, color);
+      state.board[cell[0]][cell[1]] = color;
     },
-    changeWhite(state, { type, payload }) {
-      console.log(type, payload);
-      state.board = [
-        ...state.board,
-        (state.board[payload[0]][payload[1]] = "white"),
-      ];
+    updatePossibleCells(state, { type, payload }) {
+      state.possibleCells = checkPossibleReturnOthelloArray(
+        state.board,
+        payload.color === "black"
+      );
     },
     othelloReset(state, { type, payload }) {
       // 初期ステータスにするときはreturnでいい
-      console.log(type, payload);
       return initialState;
     },
   },
 });
 
-const { changeBlack, changeWhite, othelloReset } = othello.actions;
-export { changeBlack, changeWhite, othelloReset };
+const { changeCell, othelloReset, updatePossibleCells } = othello.actions;
+export { changeCell, othelloReset, updatePossibleCells };
 export default othello.reducer;

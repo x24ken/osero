@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { changeBlack, changeWhite } from "../store/modules/othello";
+import { changeCell } from "../store/modules/othello";
 import { setTurnColor } from "../store/modules/info";
 
 const StyledCellCover = styled.div`
@@ -46,24 +46,17 @@ const StyledCell = styled.div`
 `;
 
 const Cell = ({ cell, isClick }) => {
-  const board = useSelector((state) => state.othello.board);
-  const info = useSelector((state) => state.info);
-  const { turnColor, cpuColor } = info;
-
+  const { board, possibleCells } = useSelector((state) => state.othello);
+  const { turnColor, cpuColor } = useSelector((state) => state.info);
   const dispatch = useDispatch();
-
   const [yIndex, xIndex] = cell;
   const value = board[yIndex][xIndex];
-  const possibleCells = useSelector((state) => {
-    return state.possibleCells;
-  });
 
   const clickHander = () => {
     if (!isClick) {
       return;
     }
     if (turnColor === cpuColor) {
-      console.log("相手のターンなのでクリックできない");
       return;
     }
     // Javascriptの配列の比較がすごく難しい；；
@@ -78,12 +71,26 @@ const Cell = ({ cell, isClick }) => {
     // ひっくり返す配列がこれ↓
     const cells = possibleCells[clickIndex];
     if (turnColor === "black") {
-      cells.map((cell) => dispatch(changeBlack(cell)));
+      cells.forEach((cell) =>
+        dispatch(
+          changeCell({
+            cell,
+            color: "black",
+          })
+        )
+      );
       dispatch(setTurnColor("white"));
     }
 
     if (turnColor === "white") {
-      cells.map((cell) => dispatch(changeWhite(cell)));
+      cells.forEach((cell) =>
+        dispatch(
+          changeCell({
+            cell,
+            color: "white",
+          })
+        )
+      );
       dispatch(setTurnColor("black"));
     }
   };

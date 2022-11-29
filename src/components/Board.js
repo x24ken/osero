@@ -9,10 +9,7 @@ const StyledBoardRow = styled.div`
 `;
 
 const Board = () => {
-  const possibleCells = useSelector((state) => {
-    return state.possibleCells;
-  });
-
+  const { possibleCells } = useSelector((state) => state.othello);
   // クリックできるものを配列として取り出す
   const possibleClickCells = possibleCells.map((_) => {
     return _[0];
