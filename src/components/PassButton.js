@@ -1,5 +1,6 @@
-import { useSetTurn } from "../context/TurnContext";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { setTurnColor } from "../store/modules/info";
 
 const StyledPassButton = styled.button`
   /* オートレイアウト */
@@ -18,9 +19,11 @@ const StyledPassButton = styled.button`
 `;
 
 const PassButton = () => {
-  const setTurn = useSetTurn();
+  const dispatch = useDispatch();
+  const turnColor = useSelector((state) => state.info.turnColor);
   const clickHandler = () => {
-    setTurn((prev) => (prev === "black" ? "white" : "black"));
+    turnColor === "white" && dispatch(setTurnColor("black"));
+    turnColor === "black" && dispatch(setTurnColor("white"));
   };
   return <StyledPassButton onClick={clickHandler}>パス</StyledPassButton>;
 };

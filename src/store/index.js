@@ -1,8 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import othelloReducer from "./modules/othelloReducer";
+import othello from "./modules/othello";
+import possibleCells from "./modules/possibleCells";
+import info from "./modules/info";
 
 export default configureStore({
   reducer: {
-    othello: othelloReducer,
+    othello,
+    possibleCells,
+    info,
   },
 });

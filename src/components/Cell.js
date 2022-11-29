@@ -1,21 +1,15 @@
-import { usePossibleCells } from "../context/PossibleCellsContext";
-import { useSetTurn, useTurn } from "../context/TurnContext";
 import styled from "styled-components";
-import { useGame } from "../context/GameContext";
 import { useDispatch, useSelector } from "react-redux";
-import { changeBlack, changeWhite } from "../store/modules/othelloReducer";
-import { useEffect } from "react";
+import { changeBlack, changeWhite } from "../store/modules/othello";
+import { setTurnColor } from "../store/modules/info";
 
 const StyledCellCover = styled.div`
-  /* オートレイアウト */
-
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 2px;
   gap: 10px;
-
   background: #009436;
   border: 1px solid #000000;
 `;
@@ -23,19 +17,16 @@ const StyledCellCover = styled.div`
 const StyledCell = styled.div`
   width: 40px;
   height: 40px;
-
   &.black {
     background-color: #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 100%;
   }
-
   &.cell.white {
     background: #ffffff;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 100%;
   }
-
   &.cell.red {
     background: radial-gradient(
       50% 50% at 50% 50%,
@@ -55,20 +46,23 @@ const StyledCell = styled.div`
 `;
 
 const Cell = ({ cell, isClick }) => {
-  const othello = useSelector((state) => state.othello);
-  const othelloDispatch = useDispatch();
-  const turn = useTurn();
-  const setTurn = useSetTurn();
+  const board = useSelector((state) => state.othello.board);
+  const info = useSelector((state) => state.info);
+  const { turnColor, cpuColor } = info;
+
+  const dispatch = useDispatch();
+
   const [yIndex, xIndex] = cell;
-  const value = othello[yIndex][xIndex];
-  const possibleCells = usePossibleCells();
-  const game = useGame();
+  const value = board[yIndex][xIndex];
+  const possibleCells = useSelector((state) => {
+    return state.possibleCells;
+  });
 
   const clickHander = () => {
     if (!isClick) {
       return;
     }
-    if (game.cpu === turn) {
+    if (turnColor === cpuColor) {
       console.log("相手のターンなのでクリックできない");
       return;
     }
@@ -83,14 +77,14 @@ const Cell = ({ cell, isClick }) => {
     }
     // ひっくり返す配列がこれ↓
     const cells = possibleCells[clickIndex];
-    if (turn === "black") {
-      cells.map((cell) => othelloDispatch(changeBlack(cell)));
-      setTurn("white");
+    if (turnColor === "black") {
+      cells.map((cell) => dispatch(changeBlack(cell)));
+      dispatch(setTurnColor("white"));
     }
 
-    if (turn === "white") {
-      cells.map((cell) => othelloDispatch(changeWhite(cell)));
-      setTurn("black");
+    if (turnColor === "white") {
+      cells.map((cell) => dispatch(changeWhite(cell)));
+      dispatch(setTurnColor("black"));
     }
   };
 

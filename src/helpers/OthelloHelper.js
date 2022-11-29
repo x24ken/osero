@@ -1,4 +1,5 @@
 //ヘルパー関数・・・
+// ここがコードぐちゃぐちゃなので後でどうにかする
 const checkPossibleReturnOthelloArray = (othello, blackIsNext) => {
   const allOthelloArray = [];
   //全てのマスの可能性をさぐる

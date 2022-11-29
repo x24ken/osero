@@ -1,12 +1,9 @@
 import { useEffect } from "react";
-import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
 import { checkPossibleReturnOthelloArray } from "../helpers/OthelloHelper";
-import { usePossibleCellsDispatch } from "../context/PossibleCellsContext";
+import { possibleCellsUpdate } from "../store/modules/possibleCells";
 import Board from "./Board";
-import { useTurn } from "../context/TurnContext";
-import { useSelector } from "react-redux";
-import Reset from "./Reset";
-import { useGame } from "../context/GameContext";
+import styled from "styled-components";
 
 const StyledBoard = styled.div`
   display: flex;
@@ -16,20 +13,18 @@ const StyledBoard = styled.div`
 `;
 
 const Othello = () => {
-  const othello = useSelector((state) => state.othello);
-  const turn = useTurn();
-  const game = useGame();
-
-  const possibleCellsDispatch = usePossibleCellsDispatch();
+  const board = useSelector((state) => state.othello.board);
+  const turnColor = useSelector((state) => state.info.turnColor);
+  const dispatch = useDispatch();
 
   // PossibleCellsの配列を更新する（赤いところ)
   useEffect(() => {
     const newPossibleCells = checkPossibleReturnOthelloArray(
-      othello,
-      turn === "black"
+      board,
+      turnColor === "black"
     );
-    possibleCellsDispatch({ type: "possibleCells/update", newPossibleCells });
-  }, [othello, game, turn, possibleCellsDispatch]);
+    dispatch(possibleCellsUpdate(newPossibleCells));
+  }, [board, turnColor, dispatch]);
 
   return (
     <StyledBoard>

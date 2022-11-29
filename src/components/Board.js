@@ -1,7 +1,6 @@
 import Cell from "./Cell";
-import { usePossibleCells } from "../context/PossibleCellsContext";
 import styled from "styled-components";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const StyledBoardRow = styled.div`
   display: flex;
@@ -10,7 +9,9 @@ const StyledBoardRow = styled.div`
 `;
 
 const Board = () => {
-  const possibleCells = usePossibleCells();
+  const possibleCells = useSelector((state) => {
+    return state.possibleCells;
+  });
 
   // クリックできるものを配列として取り出す
   const possibleClickCells = possibleCells.map((_) => {

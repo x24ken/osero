@@ -1,11 +1,9 @@
 import { useEffect } from "react";
-import { useGame } from "../context/GameContext";
 import { useSelector, useDispatch } from "react-redux";
-import { usePossibleCells } from "../context/PossibleCellsContext";
-import { useSetTurn, useTurn } from "../context/TurnContext";
 import { checkPossibleReturnOthelloArray } from "../helpers/OthelloHelper";
 import Othello from "./Othello";
-import { othelloReset } from "../store/modules/othelloReducer";
+import { changeBlack, changeWhite } from "../store/modules/othello";
+import { setTurnColor } from "../store/modules/info";
 
 // 1000ms待つ処理
 const wait = () => {
@@ -17,40 +15,46 @@ const wait = () => {
 };
 
 const Game = () => {
-  const turn = useTurn();
-  const setTurn = useSetTurn();
-  const possibleCells = usePossibleCells();
-  const game = useGame();
-  const othello = useSelector((state) => state.othello);
-  const othelloDispatch = useDispatch();
+  const { turnColor, cpuColor } = useSelector((state) => state.info);
+  const possibleCells = useSelector((state) => {
+    return state.possibleCells;
+  });
+  const board = useSelector((state) => state.othello.board);
+  const dispatch = useDispatch();
 
   const computerClick = async () => {
-    if (turn === game.cpu) {
+    if (turnColor === cpuColor) {
       await wait();
       const newPossibleCells = checkPossibleReturnOthelloArray(
-        othello,
-        turn === "black"
+        board,
+        turnColor === "black"
       );
       const maxIndex = newPossibleCells.length - 1;
+      // ここがパスの挙動
       if (maxIndex === -1) {
-        setTurn((prev) => (prev === "black" ? "white" : "black"));
-        return;
+        turnColor === "black" && dispatch(setTurnColor("white"));
+        turnColor === "white" && dispatch(setTurnColor("black"));
       }
       const randomIndex = Math.floor(Math.random() * maxIndex);
-      newPossibleCells[randomIndex].map((cell) =>
-        othelloDispatch({ type: `othello/update/${turn}`, cell })
-      );
-      setTurn((prev) => (prev === "black" ? "white" : "black"));
+      newPossibleCells[randomIndex].map((cell) => {
+        if (turnColor === "black") {
+          return dispatch(changeBlack(cell));
+        } else if (turnColor === "white") {
+          return dispatch(changeWhite(cell));
+        }
+      });
+      turnColor === "black" && dispatch(setTurnColor("white"));
+      turnColor === "white" && dispatch(setTurnColor("black"));
     }
   };
 
   useEffect(() => {
     computerClick();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [turn, game]);
+  }, [turnColor]);
 
   useEffect(() => {
-    if (turn === game.cpu) {
+    if (turnColor === cpuColor) {
       if (possibleCells === 0) {
         console.log("%cお前の勝ち", "font-size: 24px");
       }

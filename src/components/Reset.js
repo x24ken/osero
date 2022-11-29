@@ -1,8 +1,7 @@
-import { useSetTurn } from "../context/TurnContext";
-import { useGameDispatch } from "../context/GameContext";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { othelloReset } from "../store/modules/othelloReducer";
+import { othelloReset } from "../store/modules/othello";
+import { resetInfo, setTurnColor } from "../store/modules/info";
 
 const StyledResetButton = styled.button`
   /* オートレイアウト */
@@ -21,14 +20,12 @@ const StyledResetButton = styled.button`
 `;
 
 const Reset = () => {
-  const othelloDispatch = useDispatch();
-  const setTurn = useSetTurn();
-  const gameDispatch = useGameDispatch();
+  const dispatch = useDispatch();
 
   const reset = () => {
-    othelloDispatch(othelloReset());
-    setTurn("black");
-    gameDispatch({ type: "game/reset" });
+    dispatch(othelloReset());
+    dispatch(setTurnColor("black"));
+    dispatch(resetInfo());
   };
   return <StyledResetButton onClick={reset}>リセット</StyledResetButton>;
 };
