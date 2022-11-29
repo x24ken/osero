@@ -6,8 +6,8 @@ const initialState = {
   cpuColor: null, // "black" or "white"
 };
 
-const info = createSlice({
-  name: "info",
+const color = createSlice({
+  name: "color",
   initialState,
   reducers: {
     setTurnColor(state, { type, payload }) {
@@ -25,6 +25,6 @@ const info = createSlice({
   },
 });
 
-const { setTurnColor, setUserColor, setCpuColor, resetInfo } = info.actions;
+const { setTurnColor, setUserColor, setCpuColor, resetInfo } = color.actions;
 export { setTurnColor, setUserColor, setCpuColor, resetInfo };
-export default info.reducer;
+export default color.reducer;

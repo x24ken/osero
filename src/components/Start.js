@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { setCpuColor, setUserColor } from "../store/modules/info";
+import { setCpuColor, setUserColor } from "../store/modules/color";
 
 const StyledStartButton = styled.button`
   display: flex;
@@ -20,7 +20,7 @@ const StyledStartButton = styled.button`
 
 const Start = () => {
   const dispatch = useDispatch();
-  const { userColor } = useSelector((state) => state.info);
+  const { userColor } = useSelector((state) => state.color);
 
   const clickHandler = () => {
     if (userColor) {

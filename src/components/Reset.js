@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { othelloReset } from "../store/modules/othello";
-import { resetInfo, setTurnColor } from "../store/modules/info";
+import { resetInfo, setTurnColor } from "../store/modules/color";
 
 const StyledResetButton = styled.button`
   /* オートレイアウト */

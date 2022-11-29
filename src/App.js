@@ -2,7 +2,6 @@ import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Main from "./components/Main";
-import ProviderCover from "./components/ProviderCover";
 import styled from "styled-components";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -19,11 +18,9 @@ function App() {
     <div className="App">
       <StyledApp>
         <Provider store={store}>
-          <ProviderCover>
-            <Header />
-            <Main />
-            <Footer />
-          </ProviderCover>
+          <Header />
+          <Main />
+          <Footer />
         </Provider>
       </StyledApp>
     </div>

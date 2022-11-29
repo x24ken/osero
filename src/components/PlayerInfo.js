@@ -1,22 +1,15 @@
 import { useSelector } from "react-redux";
 
 const PlayerInfo = () => {
-  const { userColor } = useSelector((state) => state.info);
-  const { board } = useSelector((state) => state.othello);
-  // このboardにnullがないならゲームセット判定を起きたい
-  let nullCount = 0;
-  board.forEach((row) =>
-    row.forEach((value) => {
-      if (value === null) {
-        nullCount += 1;
-      }
-    })
+  const { userColor } = useSelector((state) => state.color);
+  const { blackCount, whiteCount, nullCount } = useSelector(
+    (state) => state.counter
   );
 
   return (
     <>
       <div>
-        {nullCount === 0
+        {nullCount === 0 || blackCount === 0 || whiteCount === 0
           ? "終わりです！"
           : userColor && `あなたは${userColor}です`}
       </div>

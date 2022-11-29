@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Othello from "./Othello";
 import { changeCell, updatePossibleCells } from "../store/modules/othello";
-import { setTurnColor } from "../store/modules/info";
+import { setTurnColor } from "../store/modules/color";
 import store from "../store";
 
 // 1000ms待つ処理
@@ -15,14 +15,13 @@ const wait = () => {
 };
 
 const Game = () => {
-  const { turnColor, cpuColor } = useSelector((state) => state.info);
+  const { turnColor, cpuColor } = useSelector((state) => state.color);
   const dispatch = useDispatch();
   console.log(store.getState());
 
   const computerClick = async () => {
     if (turnColor === cpuColor) {
       await wait();
-
       dispatch(
         updatePossibleCells({
           color: cpuColor,
@@ -68,6 +67,7 @@ const Game = () => {
 
   useEffect(() => {
     computerClick();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [turnColor, cpuColor]);
 
   return (

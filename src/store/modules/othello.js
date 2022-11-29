@@ -12,7 +12,24 @@ const initialState = {
     [null, null, null, null, null, null, null, null],
     [null, null, null, null, null, null, null, null],
   ],
-  possibleCells: [], //blackのターンになるたびにuseEffectでsetしていけばいいのでは？
+  possibleCells: [
+    [
+      [2, 4],
+      [3, 4],
+    ],
+    [
+      [3, 5],
+      [3, 4],
+    ],
+    [
+      [4, 2],
+      [4, 3],
+    ],
+    [
+      [5, 3],
+      [4, 3],
+    ],
+  ], //blackのターンになるたびにuseEffectでsetしていけばいいのでは？
 };
 
 // payloadに流れてくるのはマス目の値の配列
@@ -23,7 +40,6 @@ const othello = createSlice({
   reducers: {
     changeCell(state, { type, payload }) {
       const { cell, color } = payload;
-      console.log(cell, color);
       state.board[cell[0]][cell[1]] = color;
     },
     updatePossibleCells(state, { type, payload }) {

@@ -1,4 +1,4 @@
-//ヘルパー関数・・・
+//ヘルパー関数だけど・・・
 // ここがコードぐちゃぐちゃなので後でどうにかする
 const checkPossibleReturnOthelloArray = (othello, blackIsNext) => {
   const allOthelloArray = [];
@@ -11,8 +11,6 @@ const checkPossibleReturnOthelloArray = (othello, blackIsNext) => {
   // チェンジできる数が１以上あるものは変えれる
   return allOthelloArray.filter((array) => array.length > 1);
 };
-
-// そのマス目にひっくり返るものがあるか調べる。（ある場合は配列が返ってくる）
 const checkOthelloAround = (othello, yIndex, xIndex, blackIsNext) => {
   //チェックする方向
   const directions = [
@@ -41,7 +39,6 @@ const checkOthelloAround = (othello, yIndex, xIndex, blackIsNext) => {
   });
   return change;
 };
-// そのコマの方向にひっくり返るものがあるか調べる。（ある場合は配列が返ってくる。）
 const crossCheck = (
   othello,
   yIndex,
@@ -125,14 +122,4 @@ const crossCheck = (
   return changeArray;
 };
 
-// 配列をうけとってそれを代入する
-const newOthello = (othello, array, value) => {
-  return [
-    ...othello,
-    array.forEach((change) => {
-      othello[change[0]][change[1]] = value;
-    }),
-  ];
-};
-
-export { checkPossibleReturnOthelloArray, newOthello };
+export { checkPossibleReturnOthelloArray };

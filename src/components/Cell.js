@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCell } from "../store/modules/othello";
-import { setTurnColor } from "../store/modules/info";
+import { setTurnColor } from "../store/modules/color";
 
 const StyledCellCover = styled.div`
   display: flex;
@@ -47,7 +47,7 @@ const StyledCell = styled.div`
 
 const Cell = ({ cell, isClick }) => {
   const { board, possibleCells } = useSelector((state) => state.othello);
-  const { turnColor, cpuColor } = useSelector((state) => state.info);
+  const { turnColor, cpuColor } = useSelector((state) => state.color);
   const dispatch = useDispatch();
   const [yIndex, xIndex] = cell;
   const value = board[yIndex][xIndex];

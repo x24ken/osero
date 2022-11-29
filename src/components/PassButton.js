@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { setTurnColor } from "../store/modules/info";
+import { setTurnColor } from "../store/modules/color";
 
 const StyledPassButton = styled.button`
   /* オートレイアウト */
@@ -20,7 +20,7 @@ const StyledPassButton = styled.button`
 
 const PassButton = () => {
   const dispatch = useDispatch();
-  const turnColor = useSelector((state) => state.info.turnColor);
+  const turnColor = useSelector((state) => state.color.turnColor);
   const clickHandler = () => {
     turnColor === "white" && dispatch(setTurnColor("black"));
     turnColor === "black" && dispatch(setTurnColor("white"));
