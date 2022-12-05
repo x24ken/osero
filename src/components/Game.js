@@ -2,10 +2,9 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changeCell, updatePossibleCells } from "../store/modules/othello";
 import { setTurnColor } from "../store/modules/color";
-import Othello from "./Othello";
 import store from "../store";
 
-const Game = () => {
+const Game = ({ children }) => {
   const { turnColor, cpuColor } = useSelector((state) => state.color);
   const dispatch = useDispatch();
 
@@ -58,11 +57,7 @@ const Game = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [turnColor, cpuColor]);
 
-  return (
-    <>
-      <Othello />
-    </>
-  );
+  return <>{children}</>;
 };
 
 export default Game;

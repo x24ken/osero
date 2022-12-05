@@ -1,10 +1,9 @@
 import Game from "./Game";
-import Start from "./Start";
-import Reset from "./Reset";
+import Othello from "./Othello";
 
 import styled from "styled-components";
 import Info from "./Info";
-import PassButton from "./PassButton";
+import Button from "./Button";
 
 const StyledMain = styled.main`
   display: flex;
@@ -16,24 +15,15 @@ const StyledMain = styled.main`
   position: relative;
 `;
 
-const StyledMenu = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 100px;
-`;
-
 const Main = () => {
   return (
-    <StyledMain>
-      <Info />
-      <Game />
-      <Start />
-      <StyledMenu>
-        <Reset />
-        <PassButton />
-      </StyledMenu>
-    </StyledMain>
+    <Game>
+      <StyledMain>
+        <Info />
+        <Othello />
+        <Button />
+      </StyledMain>
+    </Game>
   );
 };
 
