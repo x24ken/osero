@@ -30,7 +30,9 @@ const StyledStartButton = styled.button`
 const Button = () => {
   // グローバルstate
   const dispatch = useDispatch();
-  const { userColor, turnColor } = useSelector((state) => state.color);
+  const { userColor, turnColor, cpuColor } = useSelector(
+    (state) => state.color
+  );
   const { possibleCells } = useSelector((state) => state.othello);
   const { blackCount, whiteCount, nullCount } = useSelector(
     (state) => state.counter
@@ -70,9 +72,16 @@ const Button = () => {
   });
 
   useEffect(() => {
-    if (userColor) {
+    if (userColor === turnColor) {
       setBtnProps({
-        message: "CPUと対戦中…",
+        message: "自分のターン",
+        onClick: clickCancel,
+        disabled: true,
+      });
+    }
+    if (cpuColor === turnColor) {
+      setBtnProps({
+        message: "CPUのターン",
         onClick: clickCancel,
         disabled: true,
       });
