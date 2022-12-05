@@ -29,7 +29,8 @@ const initialState = {
       [5, 3],
       [4, 3],
     ],
-  ], //blackのターンになるたびにuseEffectでsetしていけばいいのでは？
+  ],
+  prevChangeCells: [],
 };
 
 // payloadに流れてくるのはマス目の値の配列
@@ -48,6 +49,9 @@ const othello = createSlice({
         payload.color === "black"
       );
     },
+    updatePrevChangeCells(state, { type, payload }) {
+      state.prevChangeCells = [...payload];
+    },
     othelloReset(state, { type, payload }) {
       // 初期ステータスにするときはreturnでいい
       return initialState;
@@ -55,6 +59,7 @@ const othello = createSlice({
   },
 });
 
-const { changeCell, othelloReset, updatePossibleCells } = othello.actions;
-export { changeCell, othelloReset, updatePossibleCells };
+const { changeCell, othelloReset, updatePossibleCells, updatePrevChangeCells } =
+  othello.actions;
+export { changeCell, othelloReset, updatePossibleCells, updatePrevChangeCells };
 export default othello.reducer;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { changeCell } from "../store/modules/othello";
+import { changeCell, updatePrevChangeCells } from "../store/modules/othello";
 import { setTurnColor } from "../store/modules/color";
 
 const StyledCellCover = styled.div`
@@ -20,12 +20,20 @@ const StyledCell = styled.div`
   &.black {
     background-color: #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    /* 光らせたい */
     border-radius: 100%;
+    &.yello {
+      box-shadow: 0px 4px 4px 0px rgb(255 183 0);
+    }
   }
   &.cell.white {
     background: #ffffff;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    /* 光らせたい */
     border-radius: 100%;
+    &.yello {
+      box-shadow: 0px 4px 4px 0px rgb(255 183 0);
+    }
   }
   &.cell.red {
     background: radial-gradient(
@@ -45,7 +53,7 @@ const StyledCell = styled.div`
   }
 `;
 
-const Cell = ({ cell, isClick }) => {
+const Cell = ({ cell, isClick, isChange }) => {
   const { board, possibleCells } = useSelector((state) => state.othello);
   const { turnColor, cpuColor } = useSelector((state) => state.color);
   const dispatch = useDispatch();
@@ -70,6 +78,7 @@ const Cell = ({ cell, isClick }) => {
     }
     // ひっくり返す配列がこれ↓
     const cells = possibleCells[clickIndex];
+    dispatch(updatePrevChangeCells(cells));
     if (turnColor === "black") {
       cells?.forEach((cell) =>
         dispatch(
@@ -100,7 +109,7 @@ const Cell = ({ cell, isClick }) => {
     <StyledCellCover>
       <StyledCell
         onClick={clickHander}
-        className={`cell ${isClick ? "red" : value}`}
+        className={`cell ${isClick ? "red" : value} ${isChange ? "yello" : ""}`}
       ></StyledCell>
     </StyledCellCover>
   );

@@ -10,17 +10,29 @@ const StyledBoardRow = styled.div`
 
 const Board = () => {
   const { possibleCells } = useSelector((state) => state.othello);
+  const { prevChangeCells } = useSelector((state) => state.othello);
+
   // クリックできるものを配列として取り出す
   const possibleClickCells = possibleCells?.map((_) => {
     return _[0];
   });
+
   const renderSquare = (yIndex, xIndex) => {
     const isClickArray = possibleClickCells.filter(
       (possibleCell) => possibleCell[0] === yIndex && possibleCell[1] === xIndex
     );
+
+    const prevChangeCell = prevChangeCells.filter(
+      (possibleCell) => possibleCell[0] === yIndex && possibleCell[1] === xIndex
+    );
+
+    const isChange = prevChangeCell.length === 1;
+
     const isClick = isClickArray.length === 1;
 
-    return <Cell cell={[yIndex, xIndex]} isClick={isClick} />;
+    return (
+      <Cell cell={[yIndex, xIndex]} isClick={isClick} isChange={isChange} />
+    );
   };
 
   return (

@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { changeCell, updatePossibleCells } from "../store/modules/othello";
+import {
+  changeCell,
+  updatePossibleCells,
+  updatePrevChangeCells,
+} from "../store/modules/othello";
 import { setTurnColor } from "../store/modules/color";
 import store from "../store";
 
@@ -26,6 +30,8 @@ const Game = ({ children }) => {
       }
       const randomIndex = Math.floor(Math.random() * maxIndex);
       const cells = newPossibleCells[randomIndex];
+      dispatch(updatePrevChangeCells(cells));
+
       if (turnColor === "black") {
         cells?.forEach((cell) =>
           dispatch(
