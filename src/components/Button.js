@@ -25,6 +25,11 @@ const StyledStartButton = styled.button`
   font-size: 36px;
   color: #ffffff;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  transition: all 0.3s;
+
+  &:hover {
+    opacity: ${(props) => (props.disabled ? 1 : 0.7)};
+  }
 `;
 
 const Button = () => {

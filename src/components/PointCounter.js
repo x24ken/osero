@@ -17,7 +17,7 @@ const PointCounter = () => {
     <StyledPointCounter turn={turnColor}>
       <span className={`${turnColor === "black" ? "red" : ""}`}>black</span>:
       {blackCount} vs{" "}
-      <span className={`${turnColor === "white" ? "red" : ""}`}>white</span>:{" "}
+      <span className={`${turnColor === "white" ? "red" : ""}`}>white</span>:
       {whiteCount}
     </StyledPointCounter>
   );
