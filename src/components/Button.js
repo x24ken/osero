@@ -77,20 +77,14 @@ const Button = () => {
   });
 
   useEffect(() => {
-    if (userColor === turnColor) {
+    if (userColor) {
       setBtnProps({
-        message: "自分のターン",
+        message: "対戦中...",
         onClick: clickCancel,
         disabled: true,
       });
     }
-    if (cpuColor === turnColor) {
-      setBtnProps({
-        message: "CPUのターン",
-        onClick: clickCancel,
-        disabled: true,
-      });
-    }
+
     if (possibleCells.length === 0 && userColor === turnColor) {
       setBtnProps({
         message: "パスしますか？",

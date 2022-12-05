@@ -21,7 +21,7 @@ const PlayerInfo = () => {
         {nullCount === 0 || blackCount === 0 || whiteCount === 0 ? (
           <h2>{winMessage}</h2>
         ) : (
-          ""
+          userColor && `あなたは${userColor}です`
         )}
       </div>
     </>
