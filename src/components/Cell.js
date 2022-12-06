@@ -20,8 +20,8 @@ const StyledCell = styled.div`
   &.black {
     background-color: #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    /* 光らせたい */
     border-radius: 100%;
+    /* 光らせたい */
     &.yello {
       box-shadow: 0px 4px 4px 0px rgb(255 183 0);
     }
@@ -29,8 +29,8 @@ const StyledCell = styled.div`
   &.cell.white {
     background: #ffffff;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    /* 光らせたい */
     border-radius: 100%;
+    /* 光らせたい */
     &.yello {
       box-shadow: 0px 4px 4px 0px rgb(255 183 0);
     }
@@ -43,7 +43,9 @@ const StyledCell = styled.div`
     );
     border-radius: 100%;
     cursor: pointer;
+
     &:hover {
+      opacity: 1;
       background: radial-gradient(
         50% 50% at 50% 50%,
         rgba(205, 255, 6, 0.26) 0%,

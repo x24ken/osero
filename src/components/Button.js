@@ -9,8 +9,10 @@ import {
 import { useEffect } from "react";
 import { useState } from "react";
 import { othelloReset } from "../store/modules/othello";
+import Spiner from "./Spiner";
 
 const StyledStartButton = styled.button`
+  font-family: "Noto Sans JP", sans-serif;
   margin-top: 10px;
   display: flex;
   flex-direction: row;
@@ -25,7 +27,7 @@ const StyledStartButton = styled.button`
   font-size: 36px;
   color: #ffffff;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  transition: all 0.3s;
+  transition: all 0.5s ease-in;
 
   &:hover {
     opacity: ${(props) => (props.disabled ? 1 : 0.7)};
@@ -79,7 +81,7 @@ const Button = () => {
   useEffect(() => {
     if (userColor) {
       setBtnProps({
-        message: "対戦中...",
+        message: "対戦中",
         onClick: clickCancel,
         disabled: true,
       });
