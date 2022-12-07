@@ -9,33 +9,23 @@ const StyledCellCover = styled.div`
   justify-content: center;
   align-items: center;
   padding: 2px;
-  gap: 10px;
-  background: #009436;
+  background: #009436; //グリーン
   border: 1px solid #000000;
 `;
 
 const StyledCell = styled.div`
   width: 40px;
   height: 40px;
+  border-radius: 100%;
   &.black {
-    background-color: #000000;
+    background-color: black;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 100%;
-    /* 光らせたい */
-    &.yello {
-      box-shadow: 0px 4px 4px 0px rgb(255 183 0);
-    }
   }
-  &.cell.white {
-    background: #ffffff;
+  &.white {
+    background-color: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 100%;
-    /* 光らせたい */
-    &.yello {
-      box-shadow: 0px 4px 4px 0px rgb(255 183 0);
-    }
   }
-  &.cell.red {
+  &.canClick {
     background: radial-gradient(
       50% 50% at 50% 50%,
       rgba(255, 0, 0, 0.26) 0%,
@@ -51,6 +41,36 @@ const StyledCell = styled.div`
         rgba(205, 255, 6, 0.26) 0%,
         rgba(143, 201, 20, 0.104) 100%
       );
+    }
+  }
+  &.isChange {
+    /* box-shadow: 0px 4px 4px 0px rgb(255 183 0); */
+    animation-name: ${({ color }) => {
+      return `change-${color}`;
+    }};
+    animation-duration: 0.3s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+  }
+
+  @keyframes change-black {
+    0% {
+      transform: rotateY(0);
+      background-color: white;
+    }
+    100% {
+      transform: rotateY(180deg);
+      background-color: black;
+    }
+  }
+  @keyframes change-white {
+    0% {
+      transform: rotateY(0);
+      background-color: black;
+    }
+    100% {
+      transform: rotateY(180deg);
+      background-color: white;
     }
   }
 `;
@@ -106,12 +126,15 @@ const Cell = ({ cell, isClick, isChange }) => {
     }
   };
 
-  // isClickを使って、trueの時にはonClickを出現させ、falseの時には隠したい
+  // クリック可能か？canClick　今チェンジされたか？isChange
   return (
     <StyledCellCover>
       <StyledCell
         onClick={clickHander}
-        className={`cell ${isClick ? "red" : value} ${isChange ? "yello" : ""}`}
+        color={value}
+        className={`${value} ${isClick ? "canClick" : ""} ${
+          isChange ? "isChange" : ""
+        }`}
       ></StyledCell>
     </StyledCellCover>
   );

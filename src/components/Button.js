@@ -9,8 +9,6 @@ import {
 import { useEffect } from "react";
 import { useState } from "react";
 import { othelloReset } from "../store/modules/othello";
-import Spiner from "./Spiner";
-import TestCell from "./TestCell";
 
 const StyledStartButton = styled.button`
   font-family: "Noto Sans JP", sans-serif;
