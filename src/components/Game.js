@@ -9,7 +9,9 @@ import { setTurnColor } from "../store/modules/color";
 import store from "../store";
 
 const Game = ({ children }) => {
-  const { turnColor, cpuColor } = useSelector((state) => state.color);
+  const { turnColor, cpuColor, userColor } = useSelector(
+    (state) => state.color
+  );
   const dispatch = useDispatch();
 
   const computerClick = async () => {
@@ -27,6 +29,11 @@ const Game = ({ children }) => {
       if (maxIndex === -1) {
         turnColor === "black" && dispatch(setTurnColor("white"));
         turnColor === "white" && dispatch(setTurnColor("black"));
+        dispatch(
+          updatePossibleCells({
+            color: userColor,
+          })
+        );
       }
       const randomIndex = Math.floor(Math.random() * maxIndex);
       const cells = newPossibleCells[randomIndex];
