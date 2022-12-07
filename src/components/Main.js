@@ -4,6 +4,7 @@ import Othello from "./Othello";
 import styled from "styled-components";
 import Info from "./Info";
 import Button from "./Button";
+import TestCell from "./TestCell";
 
 const StyledMain = styled.main`
   display: flex;
@@ -15,13 +16,23 @@ const StyledMain = styled.main`
   position: relative;
 `;
 
+const StyledTest = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+`;
+
 const Main = () => {
   return (
     <Game>
       <StyledMain>
         <Info />
         <Othello />
-        <Button />
+        <StyledTest>
+          <TestCell />
+          <Button />
+          <TestCell />
+        </StyledTest>
       </StyledMain>
     </Game>
   );
